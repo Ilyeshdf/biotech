@@ -1,81 +1,130 @@
 import 'package:flutter/material.dart';
+import 'package:me/screens/pharmacy_screen.dart';
+import '../screens/home_screen.dart';
+import '../screens/user_profile_screen.dart';
+import '../screens/appointments_screen.dart';
+import '../screens/dm_list_screen.dart';
+import '../screens/shorts_screen.dart';
+import '../theme/app_theme.dart';
 
 class ModernNavbar extends StatelessWidget {
   final int currentIndex;
   final Function(int) onTap;
 
   const ModernNavbar({
-    Key? key,
+    super.key,
     required this.currentIndex,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
-      height: 130, // Adjusted height for the container
-      margin: EdgeInsets.symmetric(
+      height: 130,
+      margin: const EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 19,
-      ), // Add padding on left and right
-      padding: EdgeInsets.fromLTRB(
+      ),
+      padding: const EdgeInsets.fromLTRB(
         5,
         10,
         5,
         5,
-      ), // Add padding to lift it above the bottom line
+      ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: isDark
+              ? AppTheme.darkGradient
+              : [
+                  const Color(0xFFF8F9FA),
+                  const Color(0xFFE9ECEF),
+                ],
+        ),
         borderRadius: BorderRadius.circular(40),
-        boxShadow: [
-          BoxShadow(color: Colors.black26, blurRadius: 8, offset: Offset(0, 3)),
-        ],
+        boxShadow: isDark
+            ? AppTheme.darkShadow
+            : [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 3),
+                ),
+              ],
       ),
       child: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) {
           if (index == 0) {
-            Navigator.pushNamed(context, '/home'); // Navigate to Home page
-          } else {
-            onTap(index);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+              (route) => false,
+            );
+          } else if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DMListScreen()),
+            );
+          } else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ShortsScreen()),
+            );
+          } else if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PharmacyScreen()),
+            );
+          } else if (index == 4) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => UserProfileScreen()),
+            );
           }
+          onTap(index);
         },
         type: BottomNavigationBarType.fixed,
         selectedFontSize: 14,
         unselectedFontSize: 12,
         iconSize: 30,
-        selectedItemColor: Colors.green, // Set selected item color to green
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: AppTheme.primary,
+        unselectedItemColor: isDark ? AppTheme.darkGrey : AppTheme.grey,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        items: List.generate(4, (index) {
+        items: List.generate(5, (index) {
           final isSelected = currentIndex == index;
           return BottomNavigationBarItem(
             icon: Align(
-              alignment:
-                  Alignment
-                      .center, // Center the icons vertically and horizontally
+              alignment: Alignment.center,
               child: Container(
-                decoration:
-                    isSelected
-                        ? BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.green.withOpacity(0.2),
-                        )
-                        : null,
-                padding: EdgeInsets.all(8),
+                decoration: isSelected
+                    ? BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppTheme.primary.withOpacity(0.15),
+                      )
+                    : null,
+                padding: const EdgeInsets.all(8),
                 child: Icon(
                   [
                     Icons.home_outlined,
                     Icons.chat_bubble_rounded,
-                    Icons.notifications_outlined,
+                    Icons.people_outline,
+                    Icons.local_pharmacy_outlined,
                     Icons.person_outline,
                   ][index],
-                  color: isSelected ? Colors.green : Colors.grey, // Icon color
+                  color: isSelected
+                      ? AppTheme.primary
+                      : isDark
+                          ? AppTheme.darkGrey
+                          : AppTheme.grey,
                 ),
               ),
             ),
-            label: ["Home", "Search", "Notifications", "Profile"][index],
+            label: ["Home", "Chat", "Social", "Pharmacy", "Profile"][index],
           );
         }),
       ),

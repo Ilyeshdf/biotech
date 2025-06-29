@@ -5,7 +5,7 @@ import 'doctor_profile_screen.dart';
 class DoctorListPage extends StatelessWidget {
   final String specialty;
 
-  DoctorListPage({required this.specialty});
+  const DoctorListPage({super.key, required this.specialty});
 
   @override
   Widget build(BuildContext context) {

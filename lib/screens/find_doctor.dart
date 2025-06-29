@@ -59,25 +59,24 @@ class _FindDoctorState extends State<FindDoctor> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder:
-                (context) => DoctorProfileScreen(
-                  doctorData: {
-                    'name': name,
-                    'specialty': specialty,
-                    'profilePic':
-                        'https://via.placeholder.com/150', // Example profile picture
-                    'rating': 4.5,
-                    'reviews': 120,
-                    'acceptingNewPatients': true,
-                    'experience': 10,
-                    'about':
-                        'Dr. $name is a highly experienced $specialty with over 10 years of experience.',
-                    'skills': ['Skill 1', 'Skill 2', 'Skill 3'],
-                    'achievements': ['Achievement 1', 'Achievement 2'],
-                    'practiceLocation': '123 Medical Street, City',
-                    'phoneNumber': '+1234567890',
-                  },
-                ),
+            builder: (context) => DoctorProfileScreen(
+              doctorData: {
+                'name': name,
+                'specialty': specialty,
+                'profilePic':
+                    'https://via.placeholder.com/150', // Example profile picture
+                'rating': 4.5,
+                'reviews': 120,
+                'acceptingNewPatients': true,
+                'experience': 10,
+                'about':
+                    'Dr. $name is a highly experienced $specialty with over 10 years of experience.',
+                'skills': ['Skill 1', 'Skill 2', 'Skill 3'],
+                'achievements': ['Achievement 1', 'Achievement 2'],
+                'practiceLocation': '123 Medical Street, City',
+                'phoneNumber': '+1234567890',
+              },
+            ),
           ),
         );
       },
@@ -114,6 +113,12 @@ class _FindDoctorState extends State<FindDoctor> {
           ),
         ),
         backgroundColor: Colors.green,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -130,7 +135,9 @@ class _FindDoctorState extends State<FindDoctor> {
                     borderSide: BorderSide.none,
                   ),
                   filled: true,
-                  fillColor: Colors.grey[200],
+                  fillColor: Theme.of(context).brightness == Brightness.dark
+                      ? const Color(0xFF1E1E1E)
+                      : Colors.white,
                   contentPadding: EdgeInsets.symmetric(vertical: 15),
                 ),
                 style: GoogleFonts.poppins(fontSize: 16),
@@ -139,8 +146,17 @@ class _FindDoctorState extends State<FindDoctor> {
               Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color(0xFF1E1E1E)
+                      : Colors.white,
                   borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
+                    ),
+                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,8 +197,17 @@ class _FindDoctorState extends State<FindDoctor> {
               Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.grey[200],
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color(0xFF1E1E1E)
+                      : Colors.white,
                   borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
+                    ),
+                  ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

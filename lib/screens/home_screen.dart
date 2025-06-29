@@ -5,7 +5,7 @@ import 'find_doctor.dart';
 import '../constants/app_constants.dart';
 import 'lab_results_screen.dart';
 import 'prescription_screen.dart';
-import 'appointment_screen.dart';
+import 'appointments_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,6 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
         preferredSize: Size.fromHeight(60.0),
         child: AppBar(
           backgroundColor: Colors.green,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+            ),
+          ),
           title: Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -61,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             radius: 30,
                             backgroundImage: AssetImage(
                               defaultProfileImage,
-                            ), // Replace with your image path
+                            ),
                           ),
                           SizedBox(width: 15),
                           SizedBox(width: 10),
@@ -83,15 +89,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                   color: Colors.grey,
                                 ),
                               ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/registration');
+                                },
+                                child: Text(
+                                  'Complete Your Profile',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
-                          SizedBox(width: 20),
+                          SizedBox(width: 19),
                           Spacer(),
-                          SizedBox(width: 20),
-                          Icon(
-                            Icons.notifications,
-                            color: Colors.green,
-                            size: 45,
+                          SizedBox(width: 19),
+                          IconButton(
+                            icon: const Icon(Icons.settings),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/settings');
+                            },
                           ),
                         ],
                       ),
@@ -109,7 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderSide: BorderSide.none,
                         ),
                         filled: true,
-                        fillColor: Colors.grey[200],
+                        fillColor:
+                            Theme.of(context).brightness == Brightness.dark
+                                ? const Color(0xFF1E1E1E)
+                                : Colors.grey[200],
                         contentPadding: EdgeInsets.symmetric(vertical: 15),
                       ),
                       style: GoogleFonts.poppins(fontSize: 16),
@@ -162,12 +185,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: 200,
                                         width:
                                             MediaQuery.of(context).size.width *
-                                            0.42,
+                                                0.42,
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
                                             colors: [
-                                              Colors.white,
-                                              Colors.grey[200]!,
+                                              Theme.of(context).brightness ==
+                                                      Brightness.dark
+                                                  ? const Color(0xFF121212)
+                                                  : Colors.white,
+                                              Theme.of(context).brightness ==
+                                                      Brightness.dark
+                                                  ? const Color(0xFF1E1E1E)
+                                                  : Colors.grey[200]!,
                                             ],
                                             begin: Alignment.bottomCenter,
                                             end: Alignment.topCenter,
@@ -196,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           child: Icon(
                                             Icons.medical_information,
                                             color: Colors.blue,
-                                          ), // Replace with your icon
+                                          ),
                                         ),
                                       ),
                                       Positioned(
@@ -241,8 +270,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder:
-                                            (context) => LabResultsScreen(),
+                                        builder: (context) =>
+                                            LabResultsScreen(),
                                       ),
                                     );
                                   },
@@ -253,12 +282,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: 200,
                                         width:
                                             MediaQuery.of(context).size.width *
-                                            0.42,
+                                                0.42,
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
                                             colors: [
-                                              Colors.white,
-                                              Colors.grey[200]!,
+                                              Theme.of(context).brightness ==
+                                                      Brightness.dark
+                                                  ? const Color(0xFF121212)
+                                                  : Colors.white,
+                                              Theme.of(context).brightness ==
+                                                      Brightness.dark
+                                                  ? const Color(0xFF1E1E1E)
+                                                  : Colors.grey[200]!,
                                             ],
                                             begin: Alignment.bottomCenter,
                                             end: Alignment.topCenter,
@@ -287,7 +322,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           child: Icon(
                                             Icons.biotech,
                                             color: Colors.green,
-                                          ), // Replace with your icon
+                                          ),
                                         ),
                                       ),
                                       Positioned(
@@ -337,8 +372,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder:
-                                            (context) => PrescriptionScreen(),
+                                        builder: (context) =>
+                                            PrescriptionScreen(),
                                       ),
                                     );
                                   },
@@ -349,12 +384,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: 200,
                                         width:
                                             MediaQuery.of(context).size.width *
-                                            0.42,
+                                                0.42,
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
                                             colors: [
-                                              Colors.white,
-                                              Colors.grey[200]!,
+                                              Theme.of(context).brightness ==
+                                                      Brightness.dark
+                                                  ? const Color(0xFF121212)
+                                                  : Colors.white,
+                                              Theme.of(context).brightness ==
+                                                      Brightness.dark
+                                                  ? const Color(0xFF1E1E1E)
+                                                  : Colors.grey[200]!,
                                             ],
                                             begin: Alignment.bottomCenter,
                                             end: Alignment.topCenter,
@@ -383,7 +424,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           child: Icon(
                                             Icons.medication_liquid_rounded,
                                             color: Colors.red,
-                                          ), // Replace with your icon
+                                          ),
                                         ),
                                       ),
                                       Positioned(
@@ -428,8 +469,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder:
-                                            (context) => AppointmentScreen(),
+                                        builder: (context) =>
+                                            AppointmentsScreen(),
                                       ),
                                     );
                                   },
@@ -440,12 +481,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: 200,
                                         width:
                                             MediaQuery.of(context).size.width *
-                                            0.42,
+                                                0.42,
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
                                             colors: [
-                                              Colors.white,
-                                              Colors.grey[200]!,
+                                              Theme.of(context).brightness ==
+                                                      Brightness.dark
+                                                  ? const Color(0xFF121212)
+                                                  : Colors.white,
+                                              Theme.of(context).brightness ==
+                                                      Brightness.dark
+                                                  ? const Color(0xFF1E1E1E)
+                                                  : Colors.grey[200]!,
                                             ],
                                             begin: Alignment.bottomCenter,
                                             end: Alignment.topCenter,
@@ -474,7 +521,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           child: Icon(
                                             Icons.assignment_rounded,
                                             color: Colors.orange,
-                                          ), // Replace with your icon
+                                          ),
                                         ),
                                       ),
                                       Positioned(
@@ -492,7 +539,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               Text(
-                                                'Aopointments',
+                                                'Appointments',
                                                 style: GoogleFonts.poppins(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.bold,
@@ -524,8 +571,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          ModernNavbar(currentIndex: _currentIndex, onTap: _onNavbarTap),
         ],
+      ),
+      bottomNavigationBar: ModernNavbar(
+        currentIndex: _currentIndex,
+        onTap: _onNavbarTap,
       ),
     );
   }

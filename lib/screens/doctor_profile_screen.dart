@@ -4,8 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class DoctorProfileScreen extends StatelessWidget {
   final Map<String, dynamic> doctorData;
 
-  const DoctorProfileScreen({Key? key, required this.doctorData})
-    : super(key: key);
+  const DoctorProfileScreen({super.key, required this.doctorData});
 
   @override
   Widget build(BuildContext context) {

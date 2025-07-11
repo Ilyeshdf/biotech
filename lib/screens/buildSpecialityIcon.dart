@@ -35,7 +35,7 @@ class DoctorListPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
                 itemCount: doctors.length,
@@ -74,8 +74,8 @@ class DoctorListPage extends StatelessWidget {
                     'experience': 12,
                     'about':
                         'Dr. $name is a renowned $specialty with over 12 years of experience.',
-                    'skills': ['Skill A', 'Skill B', 'Skill C'],
-                    'achievements': ['Award 1', 'Award 2'],
+                    'skills': const ['Skill A', 'Skill B', 'Skill C'],
+                    'achievements': const ['Award 1', 'Award 2'],
                     'practiceLocation': '456 Health Avenue, City',
                     'phoneNumber': '+9876543210',
                   },
@@ -85,7 +85,7 @@ class DoctorListPage extends StatelessWidget {
       },
       child: Card(
         child: ListTile(
-          leading: CircleAvatar(
+          leading: const CircleAvatar(
             radius: 30,
             backgroundImage: AssetImage('assets/doctor.jpg'),
           ),
@@ -97,7 +97,7 @@ class DoctorListPage extends StatelessWidget {
             ),
           ),
           subtitle: Text(specialty, style: GoogleFonts.poppins(fontSize: 14)),
-          trailing: Icon(Icons.arrow_forward_ios, color: Colors.green),
+          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.green),
         ),
       ),
     );

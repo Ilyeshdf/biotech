@@ -47,7 +47,7 @@ class CommentSectionState extends State<CommentSection> {
   void _addComment() async {
     if (_commentController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Comment cannot be empty'),
           behavior: SnackBarBehavior.floating,
         ),
@@ -57,7 +57,7 @@ class CommentSectionState extends State<CommentSection> {
 
     if (_commentController.text.length > 500) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Comment cannot exceed 500 characters'),
           behavior: SnackBarBehavior.floating,
         ),
@@ -73,7 +73,7 @@ class CommentSectionState extends State<CommentSection> {
       final user = await _getCurrentUser();
       if (user == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Please sign in to comment'),
             behavior: SnackBarBehavior.floating,
           ),
@@ -103,7 +103,7 @@ class CommentSectionState extends State<CommentSection> {
       _commentController.clear();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Failed to add comment. Please try again.'),
           behavior: SnackBarBehavior.floating,
         ),
@@ -150,16 +150,16 @@ class CommentSectionState extends State<CommentSection> {
                 ),
                 const Spacer(),
                 PopupMenuButton<String>(
-                  icon: Icon(Icons.sort),
+                  icon: const Icon(Icons.sort),
                   onSelected: (value) {
                     // TODO: Implement comment sorting
                   },
                   itemBuilder: (context) => [
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 'recent',
                       child: Text('Most Recent'),
                     ),
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 'popular',
                       child: Text('Most Popular'),
                     ),

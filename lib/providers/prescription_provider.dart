@@ -25,7 +25,7 @@ class Prescription {
 }
 
 class PrescriptionProvider with ChangeNotifier {
-  List<Prescription> _prescriptions = [
+  final List<Prescription> _prescriptions = [
     Prescription(
       medicationName: 'Amoxicillin',
       dosage: '500mg',

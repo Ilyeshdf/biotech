@@ -58,8 +58,8 @@ class AppointmentsScreenState extends State<AppointmentsScreen> {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            margin: EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            margin: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.green.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20),
@@ -79,13 +79,13 @@ class AppointmentsScreenState extends State<AppointmentsScreen> {
                     color: Colors.green,
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: _filters.map((filter) {
                       return Padding(
-                        padding: EdgeInsets.only(right: 12),
+                        padding: const EdgeInsets.only(right: 12),
                         child: ChoiceChip(
                           label: Text(
                             filter,
@@ -102,7 +102,7 @@ class AppointmentsScreenState extends State<AppointmentsScreen> {
                                 ? Colors.white
                                 : Colors.black,
                           ),
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 16,
                             vertical: 8,
                           ),
@@ -129,12 +129,12 @@ class AppointmentsScreenState extends State<AppointmentsScreen> {
           ),
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               itemCount: appointments.length,
               itemBuilder: (context, index) {
                 final appointment = appointments[index];
                 return Container(
-                  margin: EdgeInsets.only(bottom: 16),
+                  margin: const EdgeInsets.only(bottom: 16),
                   decoration: BoxDecoration(
                     color: Colors.green.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(20),
@@ -154,16 +154,16 @@ class AppointmentsScreenState extends State<AppointmentsScreen> {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Text(
                           appointment.specialty,
                           style: GoogleFonts.poppins(fontSize: 14),
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Row(
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: 12,
                                 vertical: 6,
                               ),
@@ -186,7 +186,7 @@ class AppointmentsScreenState extends State<AppointmentsScreen> {
                     ),
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -215,7 +215,7 @@ class AppointmentsScreenState extends State<AppointmentsScreen> {
           );
         },
         backgroundColor: Colors.green,
-        child: Icon(Icons.add, color: Colors.white),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
       bottomNavigationBar: ModernNavbar(
         currentIndex: _currentIndex,
@@ -226,7 +226,7 @@ class AppointmentsScreenState extends State<AppointmentsScreen> {
 
   Widget _buildInfoRow(String label, String value) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

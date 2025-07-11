@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:me/screens/pharmacy_screen.dart';
 import '../screens/home_screen.dart';
 import '../screens/user_profile_screen.dart';
-import '../screens/appointments_screen.dart';
 import '../screens/dm_list_screen.dart';
 import '../screens/shorts_screen.dart';
 import '../theme/app_theme.dart';
@@ -61,28 +60,28 @@ class ModernNavbar extends StatelessWidget {
           if (index == 0) {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
               (route) => false,
             );
           } else if (index == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DMListScreen()),
+              MaterialPageRoute(builder: (context) => const DMListScreen()),
             );
           } else if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ShortsScreen()),
+              MaterialPageRoute(builder: (context) => const ShortsScreen()),
             );
           } else if (index == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PharmacyScreen()),
+              MaterialPageRoute(builder: (context) => const PharmacyScreen()),
             );
           } else if (index == 4) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => UserProfileScreen()),
+              MaterialPageRoute(builder: (context) => const UserProfileScreen()),
             );
           }
           onTap(index);

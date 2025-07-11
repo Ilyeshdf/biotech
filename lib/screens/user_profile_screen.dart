@@ -43,7 +43,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.green.withOpacity(0.1),
@@ -54,10 +54,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     Center(
                       child: CircleAvatar(
                         radius: 50,
-                        backgroundImage: AssetImage(user.profilePicture),
+                        backgroundImage: NetworkImage(user.profilePicture),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -71,7 +71,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         Container(
                           height: 20,
                           width: 2,
-                          margin: EdgeInsets.symmetric(horizontal: 16),
+                          margin: const EdgeInsets.symmetric(horizontal: 16),
                           color: Colors.grey.withOpacity(0.5),
                         ),
                         Text(
@@ -86,7 +86,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildInfoContainer('Physical Metrics', [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,7 +101,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -202,7 +202,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           width: double.infinity,
           decoration: BoxDecoration(
             color: Colors.green.withOpacity(0.1),
@@ -219,12 +219,12 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   color: Colors.green,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               ...children,
             ],
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
       ],
     );
   }

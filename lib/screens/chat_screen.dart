@@ -61,7 +61,7 @@ class ChatScreenState extends State<ChatScreen> {
     });
 
     // Simulate doctor's response after 1 second
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       if (mounted) {
         setState(() {
           _messages.add(
@@ -95,7 +95,7 @@ class ChatScreenState extends State<ChatScreen> {
                 ),
               ),
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -122,13 +122,13 @@ class ChatScreenState extends State<ChatScreen> {
         backgroundColor: Colors.green,
         actions: [
           IconButton(
-            icon: Icon(Icons.video_call),
+            icon: const Icon(Icons.video_call),
             onPressed: () {
               // Implement video call functionality
             },
           ),
           IconButton(
-            icon: Icon(Icons.call),
+            icon: const Icon(Icons.call),
             onPressed: () {
               // Implement voice call functionality
             },
@@ -139,7 +139,7 @@ class ChatScreenState extends State<ChatScreen> {
         children: [
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               itemCount: _messages.length,
               itemBuilder: (context, index) {
                 final message = _messages[index];
@@ -148,8 +148,8 @@ class ChatScreenState extends State<ChatScreen> {
                       ? Alignment.centerRight
                       : Alignment.centerLeft,
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    margin: const EdgeInsets.only(bottom: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                     decoration: BoxDecoration(
                       color: message.isMe ? Colors.green : Colors.grey[200],
                       borderRadius: BorderRadius.circular(20),
@@ -164,7 +164,7 @@ class ChatScreenState extends State<ChatScreen> {
                             fontSize: 14,
                           ),
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Text(
                           message.time,
                           style: GoogleFonts.poppins(
@@ -182,8 +182,8 @@ class ChatScreenState extends State<ChatScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.all(20),
+            decoration: const BoxDecoration(
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
@@ -197,7 +197,7 @@ class ChatScreenState extends State<ChatScreen> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.only(bottom: 20),
                   child: IconButton(
                     icon: Icon(Icons.attach_file, color: Colors.grey[600]),
                     onPressed: () {
@@ -207,8 +207,8 @@ class ChatScreenState extends State<ChatScreen> {
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.only(bottom: 20),
-                    constraints: BoxConstraints(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    constraints: const BoxConstraints(
                       minHeight: 45,
                       maxHeight: 100,
                     ),
@@ -227,7 +227,7 @@ class ChatScreenState extends State<ChatScreen> {
                         ),
                         filled: true,
                         fillColor: Colors.grey[100],
-                        contentPadding: EdgeInsets.symmetric(
+                        contentPadding: const EdgeInsets.symmetric(
                           horizontal: 20,
                           vertical: 12,
                         ),
@@ -241,9 +241,9 @@ class ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.only(bottom: 20),
                   child: IconButton(
                     icon: Icon(
                       _isTyping ? Icons.send : Icons.mic,

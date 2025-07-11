@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "582534604886",
+    "project_id": "me-pro-15075",
+    "storage_bucket": "me-pro-15075.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582534604886:android:dd2322d2860cf18f9933f7",
+        "android_client_info": {
+          "package_name": "com.ilyes.doctor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWSbLH6TcZWY-2pII_YGGRX2fxfvxf0zE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

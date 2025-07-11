@@ -12,7 +12,7 @@ class AppTheme {
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
-      iconTheme: IconThemeData(color: Colors.white),
+      iconTheme: const IconThemeData(color: Colors.white),
     ),
     textTheme: TextTheme(
       bodyLarge: GoogleFonts.poppins(fontSize: 16, color: Colors.black),
@@ -32,7 +32,7 @@ class AppTheme {
       ),
       hintStyle: GoogleFonts.poppins(color: Colors.grey),
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
       selectedItemColor: Colors.green,
       unselectedItemColor: Colors.grey,
@@ -50,7 +50,7 @@ class AppTheme {
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
-      iconTheme: IconThemeData(color: Colors.white),
+      iconTheme: const IconThemeData(color: Colors.white),
     ),
     textTheme: TextTheme(
       bodyLarge: GoogleFonts.poppins(fontSize: 16, color: Colors.white),
@@ -70,7 +70,7 @@ class AppTheme {
       ),
       hintStyle: GoogleFonts.poppins(color: Colors.grey),
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.black,
       selectedItemColor: Colors.green,
       unselectedItemColor: Colors.grey,

@@ -137,8 +137,8 @@ class AppTheme {
           color: white,
         ),
       ).copyWith(
-        overlayColor: MaterialStateProperty.all(white.withOpacity(0.1)),
-        shadowColor: MaterialStateProperty.all(primary.withOpacity(0.3)),
+        overlayColor: WidgetStateProperty.all(white.withOpacity(0.1)),
+        shadowColor: WidgetStateProperty.all(primary.withOpacity(0.3)),
       );
 
   static ButtonStyle get secondaryButton => OutlinedButton.styleFrom(
@@ -193,16 +193,14 @@ class AppTheme {
   static ThemeData get lightTheme => ThemeData(
         primaryColor: primary,
         scaffoldBackgroundColor: white,
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: primary,
           secondary: accent,
           surface: white,
-          background: lightGrey,
           error: error,
           onPrimary: white,
           onSecondary: white,
           onSurface: black,
-          onBackground: black,
           onError: white,
         ),
         textTheme: TextTheme(
@@ -251,16 +249,14 @@ class AppTheme {
   static ThemeData get darkTheme => ThemeData(
         primaryColor: primary,
         scaffoldBackgroundColor: darkBackground,
-        colorScheme: ColorScheme.dark(
+        colorScheme: const ColorScheme.dark(
           primary: primary,
           secondary: accent,
           surface: darkSurface,
-          background: darkBackground,
           error: error,
           onPrimary: white,
           onSecondary: white,
           onSurface: white,
-          onBackground: white,
           onError: white,
         ),
         textTheme: TextTheme(

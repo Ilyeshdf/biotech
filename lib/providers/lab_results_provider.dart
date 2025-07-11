@@ -25,7 +25,7 @@ class LabResult {
 }
 
 class LabResultsProvider with ChangeNotifier {
-  List<LabResult> _labResults = [
+  final List<LabResult> _labResults = [
     LabResult(
       testName: 'Complete Blood Count (CBC)',
       result: '5.2',

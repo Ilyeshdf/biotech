@@ -69,8 +69,8 @@ class DMListScreenState extends State<DMListScreen> {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.all(16),
+            decoration: const BoxDecoration(
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
@@ -81,7 +81,7 @@ class DMListScreenState extends State<DMListScreen> {
               ],
             ),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(24),
@@ -93,7 +93,7 @@ class DMListScreenState extends State<DMListScreen> {
               child: Row(
                 children: [
                   Icon(Icons.search, color: Colors.grey[600]),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Expanded(
                     child: TextField(
                       controller: _searchController,
@@ -139,7 +139,7 @@ class DMListScreenState extends State<DMListScreen> {
                           size: 64,
                           color: Colors.grey[400],
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Text(
                           'No conversations found',
                           style: GoogleFonts.poppins(
@@ -160,7 +160,7 @@ class DMListScreenState extends State<DMListScreen> {
                       onTap: () => _navigateToChat(conversation),
                       child: Container(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
@@ -204,7 +204,7 @@ class DMListScreenState extends State<DMListScreen> {
                                   ),
                               ],
                             ),
-                            SizedBox(width: 16),
+                            const SizedBox(width: 16),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,7 +229,7 @@ class DMListScreenState extends State<DMListScreen> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 4),
+                                  const SizedBox(height: 4),
                                   Row(
                                     children: [
                                       Expanded(
@@ -244,9 +244,9 @@ class DMListScreenState extends State<DMListScreen> {
                                         ),
                                       ),
                                       if (conversation.unreadCount > 0) ...[
-                                        SizedBox(width: 8),
+                                        const SizedBox(width: 8),
                                         Container(
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                             horizontal: 8,
                                             vertical: 4,
                                           ),

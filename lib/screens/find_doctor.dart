@@ -43,7 +43,7 @@ class _FindDoctorState extends State<FindDoctor> {
               color: Colors.green,
             ), // Larger icon size
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             title,
             style: GoogleFonts.poppins(fontSize: 16), // Larger font size
@@ -71,8 +71,8 @@ class _FindDoctorState extends State<FindDoctor> {
                 'experience': 10,
                 'about':
                     'Dr. $name is a highly experienced $specialty with over 10 years of experience.',
-                'skills': ['Skill 1', 'Skill 2', 'Skill 3'],
-                'achievements': ['Achievement 1', 'Achievement 2'],
+                'skills': const ['Skill 1', 'Skill 2', 'Skill 3'],
+                'achievements': const ['Achievement 1', 'Achievement 2'],
                 'practiceLocation': '123 Medical Street, City',
                 'phoneNumber': '+1234567890',
               },
@@ -82,7 +82,7 @@ class _FindDoctorState extends State<FindDoctor> {
       },
       child: Card(
         child: ListTile(
-          leading: CircleAvatar(
+          leading: const CircleAvatar(
             radius: 30,
             backgroundImage: AssetImage('assets/doctor.jpg'),
           ),
@@ -94,7 +94,7 @@ class _FindDoctorState extends State<FindDoctor> {
             ),
           ),
           subtitle: Text(specialty, style: GoogleFonts.poppins(fontSize: 14)),
-          trailing: Icon(Icons.arrow_forward_ios, color: Colors.green),
+          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.green),
         ),
       ),
     );
@@ -129,7 +129,7 @@ class _FindDoctorState extends State<FindDoctor> {
               TextField(
                 decoration: InputDecoration(
                   hintText: 'Search...',
-                  prefixIcon: Icon(Icons.search, color: Colors.grey),
+                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                     borderSide: BorderSide.none,
@@ -138,13 +138,13 @@ class _FindDoctorState extends State<FindDoctor> {
                   fillColor: Theme.of(context).brightness == Brightness.dark
                       ? const Color(0xFF1E1E1E)
                       : Colors.white,
-                  contentPadding: EdgeInsets.symmetric(vertical: 15),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 15),
                 ),
                 style: GoogleFonts.poppins(fontSize: 16),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Theme.of(context).brightness == Brightness.dark
                       ? const Color(0xFF1E1E1E)
@@ -168,7 +168,7 @@ class _FindDoctorState extends State<FindDoctor> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -193,9 +193,9 @@ class _FindDoctorState extends State<FindDoctor> {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Theme.of(context).brightness == Brightness.dark
                       ? const Color(0xFF1E1E1E)
@@ -235,7 +235,7 @@ class _FindDoctorState extends State<FindDoctor> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Column(
                       children: List.generate(
                         3,
@@ -246,7 +246,7 @@ class _FindDoctorState extends State<FindDoctor> {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -259,7 +259,7 @@ class _FindDoctorState extends State<FindDoctor> {
                   ),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               _buildDoctorCard('Dr. John Doe', 'Cardiologist'),
             ],
           ),

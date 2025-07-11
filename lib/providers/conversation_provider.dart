@@ -21,7 +21,7 @@ class Conversation {
 }
 
 class ConversationProvider with ChangeNotifier {
-  List<Conversation> _conversations = [
+  final List<Conversation> _conversations = [
     Conversation(
       id: '1',
       name: 'Dr. Sarah Johnson',

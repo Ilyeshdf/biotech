@@ -28,7 +28,7 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
   void initState() {
     super.initState();
     _startDate = DateTime.now().toString().split(' ')[0];
-    _endDate = DateTime.now().add(Duration(days: 7)).toString().split(' ')[0];
+    _endDate = DateTime.now().add(const Duration(days: 7)).toString().split(' ')[0];
   }
 
   @override
@@ -98,7 +98,7 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
         backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
@@ -111,7 +111,7 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                     (value) =>
                         value!.isEmpty ? 'Please enter medication name' : null,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
@@ -123,7 +123,7 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                               value!.isEmpty ? 'Please enter dosage' : null,
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: _buildTextField(
                       controller: _frequencyController,
@@ -135,16 +135,16 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildTextField(
                 controller: _durationController,
                 label: 'Duration',
                 validator:
                     (value) => value!.isEmpty ? 'Please enter duration' : null,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
                   color: Colors.green.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
@@ -174,14 +174,14 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
                     child: GestureDetector(
                       onTap: () => _selectDate(context, true),
                       child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 12,
                           vertical: 16,
                         ),
@@ -199,18 +199,18 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                               'Start: $_startDate',
                               style: GoogleFonts.poppins(fontSize: 14),
                             ),
-                            Icon(Icons.calendar_today, color: Colors.green),
+                            const Icon(Icons.calendar_today, color: Colors.green),
                           ],
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: GestureDetector(
                       onTap: () => _selectDate(context, false),
                       child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 12,
                           vertical: 16,
                         ),
@@ -228,7 +228,7 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                               'End: $_endDate',
                               style: GoogleFonts.poppins(fontSize: 14),
                             ),
-                            Icon(Icons.calendar_today, color: Colors.green),
+                            const Icon(Icons.calendar_today, color: Colors.green),
                           ],
                         ),
                       ),
@@ -236,7 +236,7 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildTextField(
                 controller: _doctorNameController,
                 label: 'Doctor Name',
@@ -244,7 +244,7 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                     (value) =>
                         value!.isEmpty ? 'Please enter doctor name' : null,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildTextField(
                 controller: _notesController,
                 label: 'Notes',
@@ -252,13 +252,13 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
                 validator:
                     (value) => value!.isEmpty ? 'Please enter notes' : null,
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               Center(
                 child: ElevatedButton(
                   onPressed: _submitForm,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
-                    padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -303,7 +303,7 @@ class AddPrescriptionScreenState extends State<AddPrescriptionScreen> {
             borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide.none,
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         ),
       ),
     );

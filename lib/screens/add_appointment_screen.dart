@@ -57,7 +57,7 @@ class AddAppointmentScreenState extends State<AddAppointmentScreen> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
     );
     if (picked != null) {
       setState(() {
@@ -101,7 +101,7 @@ class AddAppointmentScreenState extends State<AddAppointmentScreen> {
         backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
@@ -113,18 +113,18 @@ class AddAppointmentScreenState extends State<AddAppointmentScreen> {
                 validator: (value) =>
                     value!.isEmpty ? 'Please enter doctor name' : null,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildTextField(
                 controller: _specialtyController,
                 label: 'Specialty',
                 validator: (value) =>
                     value!.isEmpty ? 'Please enter specialty' : null,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               GestureDetector(
                 onTap: () => _selectDate(context),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                   decoration: BoxDecoration(
                     color: Colors.green.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(20),
@@ -139,14 +139,14 @@ class AddAppointmentScreenState extends State<AddAppointmentScreen> {
                         'Date: $_selectedDate',
                         style: GoogleFonts.poppins(fontSize: 16),
                       ),
-                      Icon(Icons.calendar_today, color: Colors.green),
+                      const Icon(Icons.calendar_today, color: Colors.green),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
                   color: Colors.green.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
@@ -177,9 +177,9 @@ class AddAppointmentScreenState extends State<AddAppointmentScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
                   color: Colors.green.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
@@ -210,14 +210,14 @@ class AddAppointmentScreenState extends State<AddAppointmentScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildTextField(
                 controller: _locationController,
                 label: 'Location',
                 validator: (value) =>
                     value!.isEmpty ? 'Please enter location' : null,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _buildTextField(
                 controller: _notesController,
                 label: 'Notes',
@@ -225,13 +225,13 @@ class AddAppointmentScreenState extends State<AddAppointmentScreen> {
                 validator: (value) =>
                     value!.isEmpty ? 'Please enter notes' : null,
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               Center(
                 child: ElevatedButton(
                   onPressed: _submitForm,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
-                    padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -278,7 +278,7 @@ class AddAppointmentScreenState extends State<AddAppointmentScreen> {
             borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide.none,
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         ),
       ),
     );

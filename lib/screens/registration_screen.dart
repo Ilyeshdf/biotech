@@ -147,7 +147,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
       userProfileProvider.updateUser(newUser);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Profile updated successfully!')),
+        const SnackBar(content: Text('Profile updated successfully!')),
       );
 
       // Go back to the previous screen
@@ -414,7 +414,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: DropdownButtonFormField<String>(
-        value: value,
+        initialValue: value,
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle: GoogleFonts.poppins(color: Colors.grey[600]),

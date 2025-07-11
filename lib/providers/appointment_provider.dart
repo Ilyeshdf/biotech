@@ -23,7 +23,7 @@ class Appointment {
 }
 
 class AppointmentProvider with ChangeNotifier {
-  List<Appointment> _appointments = [
+  final List<Appointment> _appointments = [
     Appointment(
       id: '1',
       doctorName: 'Dr. Sarah Johnson',

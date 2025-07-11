@@ -16,14 +16,16 @@ class ShortsScreen extends StatefulWidget {
 class ShortsScreenState extends State<ShortsScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
-  Map<int, VideoPlayerController> _controllers = {};
-  Map<int, bool> _isLoading = {};
-  Map<int, String?> _errorMessages = {};
+  final Map<int, VideoPlayerController> _controllers = {};
+  final Map<int, bool> _isLoading = {};
+  final Map<int, String?> _errorMessages = {};
 
   @override
   void dispose() {
     _pageController.dispose();
-    _controllers.values.forEach((controller) => controller.dispose());
+    for (var controller in _controllers.values) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
@@ -433,7 +435,7 @@ class ShortsScreenState extends State<ShortsScreen> {
                 ),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text('Share functionality coming soon!'),
                       behavior: SnackBarBehavior.floating,
                     ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'comment_provider.dart';
 
 class ShortVideo {
   final String id;

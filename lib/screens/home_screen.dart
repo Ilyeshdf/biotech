@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.0),
+        preferredSize: const Size.fromHeight(60.0),
         child: AppBar(
           backgroundColor: Colors.green,
           shape: const RoundedRectangleBorder(
@@ -58,20 +58,20 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(3, 0, 3, 0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(3, 0, 3, 0),
                     child: Padding(
-                      padding: EdgeInsets.all(30),
+                      padding: const EdgeInsets.all(30),
                       child: Row(
                         children: [
                           CircleAvatar(
                             radius: 30,
-                            backgroundImage: AssetImage(
+                            backgroundImage: NetworkImage(
                               defaultProfileImage,
                             ),
                           ),
-                          SizedBox(width: 15),
-                          SizedBox(width: 10),
-                          SizedBox(width: 15),
+                          const SizedBox(width: 15),
+                          const SizedBox(width: 10),
+                          const SizedBox(width: 15),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -104,9 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(width: 19),
-                          Spacer(),
-                          SizedBox(width: 19),
+                          const SizedBox(width: 18),
+                          const Spacer(),
+                          const SizedBox(width: 18),
                           IconButton(
                             icon: const Icon(Icons.settings),
                             onPressed: () {
@@ -117,13 +117,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Search...',
-                        prefixIcon: Icon(Icons.search, color: Colors.grey),
+                        prefixIcon:
+                            const Icon(Icons.search, color: Colors.grey),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
                           borderSide: BorderSide.none,
@@ -133,16 +135,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             Theme.of(context).brightness == Brightness.dark
                                 ? const Color(0xFF1E1E1E)
                                 : Colors.grey[200],
-                        contentPadding: EdgeInsets.symmetric(vertical: 15),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 15),
                       ),
                       style: GoogleFonts.poppins(fontSize: 16),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 20,
                           vertical: 10,
                         ),
@@ -158,9 +161,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Padding(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 20,
                           vertical: 10,
                         ),
@@ -174,7 +177,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => FindDoctor(),
+                                        builder: (context) =>
+                                            const FindDoctor(),
                                       ),
                                     );
                                   },
@@ -222,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               25,
                                             ),
                                           ),
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.medical_information,
                                             color: Colors.blue,
                                           ),
@@ -231,7 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Positioned(
                                         bottom: 40,
                                         child: Container(
-                                          padding: EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
                                             color: Colors.transparent,
                                             borderRadius: BorderRadius.circular(
@@ -249,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(height: 5),
+                                              const SizedBox(height: 5),
                                               Text(
                                                 'Find the right doctor,',
                                                 style: GoogleFonts.poppins(
@@ -264,14 +268,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            LabResultsScreen(),
+                                            const LabResultsScreen(),
                                       ),
                                     );
                                   },
@@ -319,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               25,
                                             ),
                                           ),
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.biotech,
                                             color: Colors.green,
                                           ),
@@ -328,7 +332,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Positioned(
                                         bottom: 40,
                                         child: Container(
-                                          padding: EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
                                             color: Colors.transparent,
                                             borderRadius: BorderRadius.circular(
@@ -346,7 +350,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(height: 5),
+                                              const SizedBox(height: 5),
                                               Text(
                                                 'View your lab results',
                                                 style: GoogleFonts.poppins(
@@ -363,7 +367,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -373,7 +377,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            PrescriptionScreen(),
+                                            const PrescriptionScreen(),
                                       ),
                                     );
                                   },
@@ -421,7 +425,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               25,
                                             ),
                                           ),
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.medication_liquid_rounded,
                                             color: Colors.red,
                                           ),
@@ -430,7 +434,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Positioned(
                                         bottom: 40,
                                         child: Container(
-                                          padding: EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
                                             color: Colors.transparent,
                                             borderRadius: BorderRadius.circular(
@@ -448,7 +452,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(height: 5),
+                                              const SizedBox(height: 5),
                                               Text(
                                                 'Be good with your medications',
                                                 style: GoogleFonts.poppins(
@@ -463,14 +467,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            AppointmentsScreen(),
+                                            const AppointmentsScreen(),
                                       ),
                                     );
                                   },
@@ -518,7 +522,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               25,
                                             ),
                                           ),
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.assignment_rounded,
                                             color: Colors.orange,
                                           ),
@@ -527,7 +531,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Positioned(
                                         bottom: 40,
                                         child: Container(
-                                          padding: EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           decoration: BoxDecoration(
                                             color: Colors.transparent,
                                             borderRadius: BorderRadius.circular(
@@ -545,7 +549,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(height: 5),
+                                              const SizedBox(height: 5),
                                               Text(
                                                 'Your upcoming appointments',
                                                 style: GoogleFonts.poppins(

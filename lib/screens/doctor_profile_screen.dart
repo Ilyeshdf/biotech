@@ -50,9 +50,9 @@ class DoctorProfileScreen extends StatelessWidget {
                   backgroundImage: NetworkImage(profilePic),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.green.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
@@ -74,12 +74,12 @@ class DoctorProfileScreen extends StatelessWidget {
                         color: Colors.grey,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.star, color: Colors.amber),
-                        SizedBox(width: 5),
+                        const Icon(Icons.star, color: Colors.amber),
+                        const SizedBox(width: 5),
                         Text(
                           '$rating',
                           style: GoogleFonts.poppins(
@@ -89,7 +89,7 @@ class DoctorProfileScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       acceptingNewPatients
                           ? 'Accepting New Patients'
@@ -102,9 +102,9 @@ class DoctorProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.green.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
@@ -119,7 +119,7 @@ class DoctorProfileScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       '$experience years',
                       style: GoogleFonts.poppins(
@@ -127,7 +127,7 @@ class DoctorProfileScreen extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       'Skills',
                       style: GoogleFonts.poppins(
@@ -135,7 +135,7 @@ class DoctorProfileScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Wrap(
                       spacing: 8,
                       children:
@@ -150,7 +150,7 @@ class DoctorProfileScreen extends StatelessWidget {
                               )
                               .toList(),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       'Achievements',
                       style: GoogleFonts.poppins(
@@ -158,7 +158,7 @@ class DoctorProfileScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:
@@ -174,7 +174,7 @@ class DoctorProfileScreen extends StatelessWidget {
                               )
                               .toList(),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       'About',
                       style: GoogleFonts.poppins(
@@ -182,7 +182,7 @@ class DoctorProfileScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       about,
                       style: GoogleFonts.poppins(
@@ -193,9 +193,9 @@ class DoctorProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.green.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
@@ -210,7 +210,7 @@ class DoctorProfileScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       practiceLocation,
                       style: GoogleFonts.poppins(
@@ -218,7 +218,7 @@ class DoctorProfileScreen extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
                       height: 200, // Placeholder height for the map
                       decoration: BoxDecoration(
@@ -238,12 +238,12 @@ class DoctorProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'Phone: $phoneNumber',
                 style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Center(
                 child: ElevatedButton(
                   onPressed: () {

@@ -8,6 +8,7 @@ import '../models/prescription.dart';
 import '../models/lab_result.dart';
 import '../models/pharmacy.dart';
 import '../utils/secure_storage.dart';
+import 'mock_data_service.dart';
 
 class ApiService {
   static final ApiService _instance = ApiService._internal();
@@ -16,6 +17,7 @@ class ApiService {
 
   late Dio _dio;
   final SecureStorage _secureStorage = SecureStorage();
+  final MockDataService _mockDataService = MockDataService();
 
   void initialize() {
     _dio = Dio(BaseOptions(
@@ -36,23 +38,24 @@ class ApiService {
     ]);
   }
 
-  // Authentication endpoints
+  // Authentication endpoints - Using mock data for development
   Future<ApiResponse<User>> signIn(String email, String password) async {
     try {
-      final response = await _dio.post('/auth/signin', data: {
-        'email': email,
-        'password': password,
-      });
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 800));
 
-      final user = User.fromJson(response.data['user']);
-      final token = response.data['token'];
+      // Mock authentication logic
+      if (email == 'test@example.com' && password == 'password') {
+        final user = _mockDataService.getMockUser();
+        final token = 'mock_jwt_token_${DateTime.now().millisecondsSinceEpoch}';
 
-      await _secureStorage.saveToken(token);
-      await _secureStorage.saveUser(user);
+        await _secureStorage.saveToken(token);
+        await _secureStorage.saveUser(user);
 
-      return ApiResponse.success(user);
-    } on DioException catch (e) {
-      return ApiResponse.error(_handleDioError(e));
+        return ApiResponse.success(user);
+      } else {
+        return ApiResponse.error('Invalid email or password');
+      }
     } catch (e) {
       return ApiResponse.error('An unexpected error occurred');
     }
@@ -61,21 +64,20 @@ class ApiService {
   Future<ApiResponse<User>> signUp(
       String email, String password, String name) async {
     try {
-      final response = await _dio.post('/auth/signup', data: {
-        'email': email,
-        'password': password,
-        'name': name,
-      });
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 1000));
 
-      final user = User.fromJson(response.data['user']);
-      final token = response.data['token'];
+      // Mock registration logic
+      final user = _mockDataService.getMockUser().copyWith(
+            email: email,
+            name: name,
+          );
+      final token = 'mock_jwt_token_${DateTime.now().millisecondsSinceEpoch}';
 
       await _secureStorage.saveToken(token);
       await _secureStorage.saveUser(user);
 
       return ApiResponse.success(user);
-    } on DioException catch (e) {
-      return ApiResponse.error(_handleDioError(e));
     } catch (e) {
       return ApiResponse.error('An unexpected error occurred');
     }
@@ -83,7 +85,8 @@ class ApiService {
 
   Future<void> signOut() async {
     try {
-      await _dio.post('/auth/signout');
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 300));
     } catch (e) {
       // Continue with local cleanup even if server request fails
     } finally {
@@ -91,14 +94,14 @@ class ApiService {
     }
   }
 
-  // User profile endpoints
+  // User profile endpoints - Using mock data
   Future<ApiResponse<User>> getUserProfile() async {
     try {
-      final response = await _dio.get('/user/profile');
-      final user = User.fromJson(response.data);
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      final user = _mockDataService.getMockUser();
       return ApiResponse.success(user);
-    } on DioException catch (e) {
-      return ApiResponse.error(_handleDioError(e));
     } catch (e) {
       return ApiResponse.error('Failed to load user profile');
     }
@@ -106,27 +109,24 @@ class ApiService {
 
   Future<ApiResponse<User>> updateUserProfile(User user) async {
     try {
-      final response = await _dio.put('/user/profile', data: user.toJson());
-      final updatedUser = User.fromJson(response.data);
-      await _secureStorage.saveUser(updatedUser);
-      return ApiResponse.success(updatedUser);
-    } on DioException catch (e) {
-      return ApiResponse.error(_handleDioError(e));
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 600));
+
+      await _secureStorage.saveUser(user);
+      return ApiResponse.success(user);
     } catch (e) {
       return ApiResponse.error('Failed to update profile');
     }
   }
 
-  // Appointments endpoints
+  // Appointments endpoints - Using mock data
   Future<ApiResponse<List<Appointment>>> getAppointments() async {
     try {
-      final response = await _dio.get('/appointments');
-      final appointments = (response.data as List)
-          .map((json) => Appointment.fromJson(json))
-          .toList();
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 700));
+
+      final appointments = _mockDataService.getMockAppointments();
       return ApiResponse.success(appointments);
-    } on DioException catch (e) {
-      return ApiResponse.error(_handleDioError(e));
     } catch (e) {
       return ApiResponse.error('Failed to load appointments');
     }
@@ -135,12 +135,15 @@ class ApiService {
   Future<ApiResponse<Appointment>> createAppointment(
       Appointment appointment) async {
     try {
-      final response =
-          await _dio.post('/appointments', data: appointment.toJson());
-      final createdAppointment = Appointment.fromJson(response.data);
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 800));
+
+      final createdAppointment = appointment.copyWith(
+        id: 'app_${DateTime.now().millisecondsSinceEpoch}',
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      );
       return ApiResponse.success(createdAppointment);
-    } on DioException catch (e) {
-      return ApiResponse.error(_handleDioError(e));
     } catch (e) {
       return ApiResponse.error('Failed to create appointment');
     }
@@ -149,12 +152,13 @@ class ApiService {
   Future<ApiResponse<Appointment>> updateAppointment(
       Appointment appointment) async {
     try {
-      final response = await _dio.put('/appointments/${appointment.id}',
-          data: appointment.toJson());
-      final updatedAppointment = Appointment.fromJson(response.data);
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 600));
+
+      final updatedAppointment = appointment.copyWith(
+        updatedAt: DateTime.now(),
+      );
       return ApiResponse.success(updatedAppointment);
-    } on DioException catch (e) {
-      return ApiResponse.error(_handleDioError(e));
     } catch (e) {
       return ApiResponse.error('Failed to update appointment');
     }
@@ -162,55 +166,49 @@ class ApiService {
 
   Future<ApiResponse<void>> deleteAppointment(String id) async {
     try {
-      await _dio.delete('/appointments/$id');
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 400));
+
       return ApiResponse.success(null);
-    } on DioException catch (e) {
-      return ApiResponse.error(_handleDioError(e));
     } catch (e) {
       return ApiResponse.error('Failed to delete appointment');
     }
   }
 
-  // Prescriptions endpoints
+  // Prescriptions endpoints - Using mock data
   Future<ApiResponse<List<Prescription>>> getPrescriptions() async {
     try {
-      final response = await _dio.get('/prescriptions');
-      final prescriptions = (response.data as List)
-          .map((json) => Prescription.fromJson(json))
-          .toList();
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 600));
+
+      final prescriptions = _mockDataService.getMockPrescriptions();
       return ApiResponse.success(prescriptions);
-    } on DioException catch (e) {
-      return ApiResponse.error(_handleDioError(e));
     } catch (e) {
       return ApiResponse.error('Failed to load prescriptions');
     }
   }
 
-  // Lab results endpoints
+  // Lab results endpoints - Using mock data
   Future<ApiResponse<List<LabResult>>> getLabResults() async {
     try {
-      final response = await _dio.get('/lab-results');
-      final labResults = (response.data as List)
-          .map((json) => LabResult.fromJson(json))
-          .toList();
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      final labResults = _mockDataService.getMockLabResults();
       return ApiResponse.success(labResults);
-    } on DioException catch (e) {
-      return ApiResponse.error(_handleDioError(e));
     } catch (e) {
       return ApiResponse.error('Failed to load lab results');
     }
   }
 
-  // Pharmacy endpoints
+  // Pharmacy endpoints - Using mock data
   Future<ApiResponse<List<Pharmacy>>> getPharmacies() async {
     try {
-      final response = await _dio.get('/pharmacies');
-      final pharmacies = (response.data as List)
-          .map((json) => Pharmacy.fromJson(json))
-          .toList();
+      // Simulate API delay
+      await Future.delayed(const Duration(milliseconds: 400));
+
+      final pharmacies = _mockDataService.getMockPharmacies();
       return ApiResponse.success(pharmacies);
-    } on DioException catch (e) {
-      return ApiResponse.error(_handleDioError(e));
     } catch (e) {
       return ApiResponse.error('Failed to load pharmacies');
     }

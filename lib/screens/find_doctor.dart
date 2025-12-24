@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/modern_navbar.dart';
+import '../widgets/safe_network_image.dart';
 import 'buildSpecialityIcon.dart';
 import 'doctor_profile_screen.dart';
 
@@ -64,7 +65,7 @@ class _FindDoctorState extends State<FindDoctor> {
                 'name': name,
                 'specialty': specialty,
                 'profilePic':
-                    'https://via.placeholder.com/150', // Example profile picture
+                    'https://i.pravatar.cc/150?img=${name.hashCode % 70}', // Example profile picture
                 'rating': 4.5,
                 'reviews': 120,
                 'acceptingNewPatients': true,
@@ -82,9 +83,20 @@ class _FindDoctorState extends State<FindDoctor> {
       },
       child: Card(
         child: ListTile(
-          leading: const CircleAvatar(
-            radius: 30,
-            backgroundImage: AssetImage('assets/doctor.jpg'),
+          leading: SafeNetworkImage(
+            imageUrl: 'https://i.pravatar.cc/150?img=12',
+            width: 60,
+            height: 60,
+            isCircular: true,
+            errorWidget: CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.grey[300],
+              child: Icon(
+                Icons.person,
+                size: 30,
+                color: Colors.grey[600],
+              ),
+            ),
           ),
           title: Text(
             name,

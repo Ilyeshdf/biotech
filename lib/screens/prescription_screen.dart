@@ -58,7 +58,7 @@ class PrescriptionScreenState extends State<PrescriptionScreen> {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             margin: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.green.withOpacity(0.1),
@@ -85,7 +85,7 @@ class PrescriptionScreenState extends State<PrescriptionScreen> {
                   child: Row(
                     children: _filters.map((filter) {
                       return Padding(
-                        padding: const EdgeInsets.only(right: 12),
+                        padding: const EdgeInsets.only(right: 8),
                         child: ChoiceChip(
                           label: Text(
                             filter,
@@ -160,27 +160,30 @@ class PrescriptionScreenState extends State<PrescriptionScreen> {
                           style: GoogleFonts.poppins(fontSize: 14),
                         ),
                         const SizedBox(height: 4),
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 6,
-                              ),
-                              decoration: BoxDecoration(
-                                color: _getStatusColor(prescription.status),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Text(
-                                prescription.status,
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
+                        SizedBox(
+                          width: double.infinity,
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: _getStatusColor(prescription.status),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Text(
+                                  prescription.status,
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),

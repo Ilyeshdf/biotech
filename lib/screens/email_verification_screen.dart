@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   const EmailVerificationScreen({super.key});
@@ -12,15 +11,13 @@ class EmailVerificationScreen extends StatefulWidget {
 }
 
 class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
-  bool _isEmailSent = false;
-  bool _isLoading = false;
-  bool _isChecking = false;
   Timer? _timer;
+
 
   @override
   void initState() {
     super.initState();
-    _sendVerificationEmail();
+    // Simulate check
     _startTimer();
   }
 
@@ -36,84 +33,26 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     });
   }
 
-  void _sendVerificationEmail() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user != null && !user.emailVerified) {
-        await user.sendEmailVerification();
-        setState(() {
-          _isEmailSent = true;
-        });
-        ScaffoldMessenger.of(context).showSnackBar(
+  void _checkEmailVerification() async {
+    // For mock/dev, just auto-verify after a few seconds
+    _timer?.cancel();
+    if (mounted) {
+       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Verification email sent! Please check your inbox.'),
+            content: Text('Development Mode: Auto-verified!'),
             backgroundColor: Colors.green,
           ),
         );
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error sending verification email: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
+        Navigator.pushReplacementNamed(context, '/home');
     }
   }
 
-  void _checkEmailVerification() async {
-    if (mounted) {
-      setState(() {
-        _isChecking = true;
-      });
-    }
 
-    try {
-      final user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        await user.reload();
-        if (user.emailVerified) {
-          _timer?.cancel();
-          if (!mounted) return;
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (!mounted) return;
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Email verified successfully!'),
-                backgroundColor: Colors.green,
-              ),
-            );
-            Navigator.pushReplacementNamed(context, '/home');
-          });
-        }
-      }
-    } catch (e) {
-      print('Error checking email verification: $e');
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isChecking = false;
-        });
-      }
-    }
-  }
-
-  void _resendVerificationEmail() {
-    _sendVerificationEmail();
-  }
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
-    final email = user?.email ?? '';
+    // Dummy email
+    final email = 'user@example.com';
 
     return Scaffold(
       appBar: AppBar(
@@ -174,75 +113,11 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 ),
               ),
               const SizedBox(height: 30),
-              Text(
-                'Please check your email and click the verification link to continue.',
-                style: GoogleFonts.poppins(
-                  fontSize: 14,
-                  color: Colors.grey[600],
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 40),
-              if (_isChecking)
-                Column(
-                  children: [
-                    const CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Checking verification status...',
-                      style: GoogleFonts.poppins(
-                        fontSize: 14,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                  ],
-                ),
-              const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: _isLoading ? null : _resendVerificationEmail,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: _isLoading
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.white),
-                        ),
-                      )
-                    : Text(
-                        'Resend Verification Email',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
-              ),
+              const CircularProgressIndicator(),
               const SizedBox(height: 20),
-              TextButton(
-                onPressed: () {
-                  // Sign out and go back to sign in
-                  FirebaseAuth.instance.signOut();
-                  Navigator.pushReplacementNamed(context, '/signin');
-                },
-                child: Text(
-                  'Back to Sign In',
-                  style: GoogleFonts.poppins(
-                    color: Colors.grey[600],
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+              Text(
+                'Auto-verifying (Mock Mode)...',
+                 style: GoogleFonts.poppins(color: Colors.grey),
               ),
             ],
           ),

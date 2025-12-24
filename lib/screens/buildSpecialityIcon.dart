@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../widgets/safe_network_image.dart';
 import 'doctor_profile_screen.dart';
 
 class DoctorListPage extends StatelessWidget {
@@ -61,33 +62,43 @@ class DoctorListPage extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder:
-                (context) => DoctorProfileScreen(
-                  doctorData: {
-                    'name': name,
-                    'specialty': specialty,
-                    'profilePic':
-                        'https://via.placeholder.com/150', // Example profile picture
-                    'rating': 4.7,
-                    'reviews': 95,
-                    'acceptingNewPatients': true,
-                    'experience': 12,
-                    'about':
-                        'Dr. $name is a renowned $specialty with over 12 years of experience.',
-                    'skills': const ['Skill A', 'Skill B', 'Skill C'],
-                    'achievements': const ['Award 1', 'Award 2'],
-                    'practiceLocation': '456 Health Avenue, City',
-                    'phoneNumber': '+9876543210',
-                  },
-                ),
+            builder: (context) => DoctorProfileScreen(
+              doctorData: {
+                'name': name,
+                'specialty': specialty,
+                'profilePic':
+                    'https://i.pravatar.cc/150?img=${name.hashCode % 70}', // Example profile picture
+                'rating': 4.7,
+                'reviews': 95,
+                'acceptingNewPatients': true,
+                'experience': 12,
+                'about':
+                    'Dr. $name is a renowned $specialty with over 12 years of experience.',
+                'skills': const ['Skill A', 'Skill B', 'Skill C'],
+                'achievements': const ['Award 1', 'Award 2'],
+                'practiceLocation': '456 Health Avenue, City',
+                'phoneNumber': '+9876543210',
+              },
+            ),
           ),
         );
       },
       child: Card(
         child: ListTile(
-          leading: const CircleAvatar(
-            radius: 30,
-            backgroundImage: AssetImage('assets/doctor.jpg'),
+          leading: SafeNetworkImage(
+            imageUrl: 'https://i.pravatar.cc/150?img=13',
+            width: 60,
+            height: 60,
+            isCircular: true,
+            errorWidget: CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.grey[300],
+              child: Icon(
+                Icons.person,
+                size: 30,
+                color: Colors.grey[600],
+              ),
+            ),
           ),
           title: Text(
             name,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../widgets/safe_network_image.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
   final Map<String, dynamic> doctorData;
@@ -11,7 +12,7 @@ class DoctorProfileScreen extends StatelessWidget {
     final String name = doctorData['name'] ?? 'Unknown';
     final String specialty = doctorData['specialty'] ?? 'Unknown';
     final String profilePic =
-        doctorData['profilePic'] ?? 'https://via.placeholder.com/150';
+        doctorData['profilePic'] ?? 'https://i.pravatar.cc/150?img=1';
     final double rating = doctorData['rating'] ?? 0.0;
     final int reviews = doctorData['reviews'] ?? 0;
     final bool acceptingNewPatients =
@@ -45,9 +46,20 @@ class DoctorProfileScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: NetworkImage(profilePic),
+                child: SafeNetworkImage(
+                  imageUrl: profilePic,
+                  width: 100,
+                  height: 100,
+                  isCircular: true,
+                  errorWidget: CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.grey[300],
+                    child: Icon(
+                      Icons.person,
+                      size: 50,
+                      color: Colors.grey[600],
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
@@ -138,17 +150,16 @@ class DoctorProfileScreen extends StatelessWidget {
                     const SizedBox(height: 5),
                     Wrap(
                       spacing: 8,
-                      children:
-                          skills
-                              .map(
-                                (skill) => Chip(
-                                  label: Text(skill),
-                                  backgroundColor: Colors.green.withOpacity(
-                                    0.2,
-                                  ),
-                                ),
-                              )
-                              .toList(),
+                      children: skills
+                          .map(
+                            (skill) => Chip(
+                              label: Text(skill),
+                              backgroundColor: Colors.green.withOpacity(
+                                0.2,
+                              ),
+                            ),
+                          )
+                          .toList(),
                     ),
                     const SizedBox(height: 20),
                     Text(
@@ -161,18 +172,17 @@ class DoctorProfileScreen extends StatelessWidget {
                     const SizedBox(height: 5),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children:
-                          achievements
-                              .map(
-                                (achievement) => Text(
-                                  '- $achievement',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              )
-                              .toList(),
+                      children: achievements
+                          .map(
+                            (achievement) => Text(
+                              '- $achievement',
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                color: Colors.black,
+                              ),
+                            ),
+                          )
+                          .toList(),
                     ),
                     const SizedBox(height: 20),
                     Text(

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../providers/user_profile_provider.dart';
 import '../widgets/modern_navbar.dart';
+import '../widgets/safe_network_image.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
@@ -52,9 +53,20 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 child: Column(
                   children: [
                     Center(
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: NetworkImage(user.profilePicture),
+                      child: SafeNetworkImage(
+                        imageUrl: user!.profilePicture ?? '',
+                        width: 100,
+                        height: 100,
+                        isCircular: true,
+                        errorWidget: CircleAvatar(
+                          radius: 50,
+                          backgroundColor: Colors.grey[300],
+                          child: Icon(
+                            Icons.person,
+                            size: 50,
+                            color: Colors.grey[600],
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),

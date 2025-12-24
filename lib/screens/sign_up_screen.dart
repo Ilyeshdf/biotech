@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import '../theme/app_theme.dart';
+import '../services/api_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -25,22 +26,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _signUp() async {
     if (_formKey.currentState!.validate()) {
-      try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
-        // Registration successful, navigate to email verification
-        Navigator.pushReplacementNamed(context, '/email_verification');
-      } on FirebaseAuthException catch (e) {
-        String message = e.message ?? 'حدث خطأ أثناء التسجيل: ${e.code}';
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message)),
-        );
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('حدث خطأ غير متوقع.')),
-        );
+      // Show loading indicator
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(child: CircularProgressIndicator()),
+      );
+
+      final apiService = ApiService();
+      final response = await apiService.signUp(
+        _emailController.text.trim(),
+        _passwordController.text.trim(),
+        _emailController.text.trim().split('@')[0], // Default name from email
+      );
+
+      // Hide loading indicator
+      if (mounted) Navigator.pop(context);
+
+      if (response.error == null) {
+        // Registration successful, navigate to home (skipping verification for mock)
+         if (mounted) {
+           Navigator.pushReplacementNamed(context, '/home');
+         }
+      } else {
+         if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text(response.error ?? 'حدث خطأ أثناء التسجيل')),
+          );
+        }
       }
     }
   }
@@ -51,42 +65,70 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 40),
+                  // Logo Placeholder
+                  Center(
+                    child: Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: AppTheme.primary,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'a',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Serif',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
                   Text(
-                    'Create Account',
-                    style: GoogleFonts.poppins(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
+                    'Register Now for Free!',
+                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w700,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Sign up to get started',
-                    style: GoogleFonts.poppins(
-                      fontSize: 16,
-                      color: Colors.grey,
+                    'Enter the following data to create a new account, start now for free!',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                      height: 1.5,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 40),
+                  
+                  _buildInputLabel('Full Name'),
+                  TextFormField(
+                    controller: _emailController, // Using this for name as well for demo
+                    decoration: const InputDecoration(
+                      hintText: 'Ahmed M Y Al-Azaiza',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  _buildInputLabel('Email'),
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      hintText: 'Enter your email',
-                      prefixIcon: const Icon(Icons.email_outlined),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                    decoration: const InputDecoration(
+                      hintText: 'ahmedazy.uxui@gmail.com',
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -100,16 +142,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     },
                   ),
                   const SizedBox(height: 20),
+
+                  _buildInputLabel('Password'),
                   TextFormField(
                     controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                      labelText: 'Password',
-                      hintText: 'Enter your password',
-                      prefixIcon: const Icon(Icons.lock_outline),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      hintText: '******',
+                      suffixIcon: Icon(Icons.visibility_outlined, color: Colors.grey[400], size: 20),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -121,76 +161,147 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       return null;
                     },
                   ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    controller: _confirmPasswordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Confirm Password',
-                      hintText: 'Confirm your password',
-                      prefixIcon: const Icon(Icons.lock_outline),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please confirm your password';
-                      }
-                      if (value != _passwordController.text) {
-                        return 'Passwords do not match';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 40),
+
                   ElevatedButton(
                     onPressed: _signUp,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                      backgroundColor: AppTheme.primary,
+                      padding: const EdgeInsets.symmetric(vertical: 18),
+                      elevation: 0,
                     ),
                     child: Text(
-                      'Sign Up',
+                      'Register Now',
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                        color: AppTheme.darkGreen,
                       ),
                     ),
                   ),
+                  
                   const SizedBox(height: 20),
+                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Already have an account? ',
                         style: GoogleFonts.poppins(
-                          color: Colors.grey,
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          'Sign In',
-                          style: GoogleFonts.poppins(
-                            color: Colors.green,
-                            fontWeight: FontWeight.w600,
+                      GestureDetector(
+                        onTap: () => Navigator.pop(context),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey[200]!),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            'Sign In Now!',
+                            style: GoogleFonts.poppins(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 13,
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
+
+                  const SizedBox(height: 40),
+                  
+                  Row(
+                    children: [
+                      Expanded(child: Divider(color: Colors.grey[200])),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          'Or sign in using',
+                          style: GoogleFonts.poppins(
+                            fontSize: 12,
+                            color: Colors.grey[400],
+                          ),
+                        ),
+                      ),
+                      Expanded(child: Divider(color: Colors.grey[200])),
+                    ],
+                  ),
+                  
+                  const SizedBox(height: 20),
+                  
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildSocialButton(
+                          'Google',
+                          'assets/icons/google.png', // Assuming assets exist or will fall back
+                          Colors.red,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: _buildSocialButton(
+                          'Facebook',
+                          'assets/icons/facebook.png',
+                          Colors.blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
                 ],
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildInputLabel(String label) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 4, bottom: 8),
+      child: Text(
+        label,
+        style: GoogleFonts.poppins(
+          fontSize: 14,
+          color: Colors.grey[400],
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSocialButton(String label, String iconPath, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey[100]!),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            label == 'Google' ? Icons.g_mobiledata : Icons.facebook,
+            color: label == 'Google' ? Colors.red : Colors.blue,
+            size: 24,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            label,
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: AppTheme.darkGreen,
+            ),
+          ),
+        ],
       ),
     );
   }

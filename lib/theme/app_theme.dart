@@ -3,8 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Primary Colors
-  static const Color primary = Color(0xFF4CAF50);
-  static const Color accent = Color(0xFF8BC34A);
+  static const Color primary = Color(0xFFC9D95C); // Light Green
+  static const Color accent = Color(0xFF80B155); // Medium Green
+  static const Color paleLime = Color(0xFFEAEF9D); // Very Light Yellow-Green
+  static const Color forestGreen = Color(0xFF498428); // Dark Green
+  static const Color darkGreen = Color(0xFF336A29); // Very Dark Green
   static const Color error = Color(0xFFE57373);
 
   // Light Theme Colors
@@ -35,7 +38,7 @@ class AppTheme {
   // Shadows
   static List<BoxShadow> darkShadow = [
     BoxShadow(
-      color: Colors.black.withOpacity(0.3),
+      color: Colors.black.withValues(alpha: 0.3),
       blurRadius: 8,
       offset: const Offset(0, 2),
     ),
@@ -129,7 +132,7 @@ class AppTheme {
         foregroundColor: white,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(30),
         ),
         elevation: 0,
         textStyle: bodyMedium.copyWith(
@@ -137,8 +140,8 @@ class AppTheme {
           color: white,
         ),
       ).copyWith(
-        overlayColor: WidgetStateProperty.all(white.withOpacity(0.1)),
-        shadowColor: WidgetStateProperty.all(primary.withOpacity(0.3)),
+        overlayColor: WidgetStateProperty.all(white.withValues(alpha: 0.1)),
+        shadowColor: WidgetStateProperty.all(primary.withValues(alpha: 0.3)),
       );
 
   static ButtonStyle get secondaryButton => OutlinedButton.styleFrom(
@@ -157,26 +160,25 @@ class AppTheme {
   // Input Decoration
   static InputDecorationTheme get inputDecoration => InputDecorationTheme(
         filled: true,
-        fillColor: lightGrey,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: Colors.grey[200]!),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: Colors.grey[200]!),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: primary, width: 2),
+          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(color: primary, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: error, width: 2),
+          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(color: error, width: 1),
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        hintStyle: bodyMedium.copyWith(color: grey),
+        hintStyle: TextStyle(color: Colors.grey[400], fontSize: 14),
       );
 
   // Card Decoration
@@ -186,41 +188,59 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
-        shadowColor: black.withOpacity(0.1),
+        shadowColor: black.withValues(alpha: 0.1),
       );
 
   // Light Theme
   static ThemeData get lightTheme => ThemeData(
+        useMaterial3: true,
         primaryColor: primary,
-        scaffoldBackgroundColor: white,
+        scaffoldBackgroundColor: paleLime,
         colorScheme: const ColorScheme.light(
           primary: primary,
           secondary: accent,
           surface: white,
           error: error,
-          onPrimary: white,
+          onPrimary: darkGreen,
           onSecondary: white,
-          onSurface: black,
+          onSurface: darkGreen,
           onError: white,
         ),
         textTheme: TextTheme(
-          displayLarge: heading1.copyWith(color: black),
-          displayMedium: heading2.copyWith(color: black),
-          displaySmall: heading3.copyWith(color: black),
-          bodyLarge: bodyLarge.copyWith(color: black),
-          bodyMedium: bodyMedium.copyWith(color: black),
-          bodySmall: bodySmall.copyWith(color: black),
+          displayLarge: heading1.copyWith(color: darkGreen),
+          displayMedium: heading2.copyWith(color: darkGreen),
+          displaySmall: heading3.copyWith(color: darkGreen),
+          bodyLarge: bodyLarge.copyWith(color: darkGreen),
+          bodyMedium: bodyMedium.copyWith(color: darkGreen),
+          bodySmall: bodySmall.copyWith(color: forestGreen),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
-          style: primaryButton,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: primary,
+            foregroundColor: darkGreen,
+            elevation: 0,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            textStyle: heading3.copyWith(fontSize: 16),
+          ),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
-          style: secondaryButton,
+          style: OutlinedButton.styleFrom(
+            foregroundColor: darkGreen,
+            side: const BorderSide(color: primary, width: 2),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            textStyle: heading3.copyWith(fontSize: 16),
+          ),
         ),
         inputDecorationTheme: inputDecoration,
-        cardTheme: cardTheme,
+        cardTheme: cardTheme.copyWith(color: white),
         appBarTheme: AppBarTheme(
-          backgroundColor: primary,
+          backgroundColor: darkGreen,
           foregroundColor: white,
           elevation: 0,
           centerTitle: true,
@@ -229,18 +249,18 @@ class AppTheme {
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: white,
-          selectedItemColor: primary,
-          unselectedItemColor: grey,
+          selectedItemColor: darkGreen,
+          unselectedItemColor: forestGreen,
           type: BottomNavigationBarType.fixed,
           elevation: 8,
         ),
-        dividerTheme: const DividerThemeData(
-          color: lightGrey,
+        dividerTheme: DividerThemeData(
+          color: accent.withValues(alpha: 0.2),
           thickness: 1,
           space: 1,
         ),
         iconTheme: const IconThemeData(
-          color: primary,
+          color: darkGreen,
           size: 24,
         ),
       );

@@ -71,6 +71,8 @@ class CommentSectionState extends State<CommentSection> {
 
       // TODO: Replace with actual user data from your auth system
       final user = await _getCurrentUser();
+      if (!mounted) return;
+      
       if (user == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -95,6 +97,7 @@ class CommentSectionState extends State<CommentSection> {
       );
 
       // Update video comment count
+      if (!mounted) return;
       context.read<VideoProvider>().updateCommentCount(
             widget.videoId,
             commentProvider.getCommentCount(widget.videoId),
@@ -102,6 +105,7 @@ class CommentSectionState extends State<CommentSection> {
 
       _commentController.clear();
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Failed to add comment. Please try again.'),

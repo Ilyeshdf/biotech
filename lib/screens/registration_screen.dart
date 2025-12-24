@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:me/models/user.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_profile_provider.dart';
 
@@ -43,7 +44,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
           Provider.of<UserProfileProvider>(context, listen: false);
       final currentUser = userProfileProvider.user;
 
-      _ageController.text = currentUser.age.toString();
+      _ageController.text = currentUser!.age.toString();
       _gender = currentUser.gender;
       _weightController.text = currentUser.weight.toString();
       _heightController.text = currentUser.height.toString();
@@ -112,8 +113,10 @@ class RegistrationScreenState extends State<RegistrationScreen> {
       final userProfileProvider =
           Provider.of<UserProfileProvider>(context, listen: false);
       final newUser = User(
+        id: userProfileProvider.user?.id ?? 'temp_id', // Retain existing ID
+        name: userProfileProvider.user?.name ?? '', // Retain existing name
         profilePicture:
-            userProfileProvider.user.profilePicture, // Retain existing
+            userProfileProvider.user?.profilePicture, // Retain existing
         age: int.tryParse(_ageController.text) ?? 0,
         gender: _gender ?? '',
         weight: double.tryParse(_weightController.text) ?? 0.0,
@@ -139,10 +142,13 @@ class RegistrationScreenState extends State<RegistrationScreen> {
             .map((e) => e.trim())
             .where((e) => e.isNotEmpty)
             .toList(),
-        lastDoctorVisit: userProfileProvider.user.lastDoctorVisit,
-        lastVaccination: userProfileProvider.user.lastVaccination,
-        lastBloodTest: userProfileProvider.user.lastBloodTest,
-        lastLabTest: userProfileProvider.user.lastLabTest,
+        lastDoctorVisit: userProfileProvider.user!.lastDoctorVisit,
+        lastVaccination: userProfileProvider.user!.lastVaccination,
+        lastBloodTest: userProfileProvider.user!.lastBloodTest,
+        lastLabTest: userProfileProvider.user!.lastLabTest,
+        createdAt: userProfileProvider.user?.createdAt ?? DateTime.now(),
+        updatedAt: DateTime.now(),
+        isProfileComplete: true,
       );
       userProfileProvider.updateUser(newUser);
 

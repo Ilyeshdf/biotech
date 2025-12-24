@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/modern_navbar.dart';
+import '../widgets/safe_network_image.dart';
 import 'find_doctor.dart';
 import '../constants/app_constants.dart';
 import 'lab_results_screen.dart';
@@ -63,50 +64,56 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(30),
                       child: Row(
                         children: [
-                          CircleAvatar(
-                            radius: 30,
-                            backgroundImage: NetworkImage(
-                              defaultProfileImage,
+                          SafeNetworkImage(
+                            imageUrl: defaultProfileImage,
+                            width: 60,
+                            height: 60,
+                            isCircular: true,
+                            errorWidget: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.grey[300],
+                              child: Icon(
+                                Icons.person,
+                                size: 30,
+                                color: Colors.grey[600],
+                              ),
                             ),
                           ),
-                          const SizedBox(width: 15),
                           const SizedBox(width: 10),
-                          const SizedBox(width: 15),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                userName,
-                                style: GoogleFonts.poppins(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text(
-                                userSubtitle,
-                                style: GoogleFonts.poppins(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/registration');
-                                },
-                                child: Text(
-                                  'Complete Your Profile',
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  userName,
                                   style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  userSubtitle,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/registration');
+                                  },
+                                  child: Text(
+                                    'Complete Your Profile',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 14,
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          const SizedBox(width: 18),
-                          const Spacer(),
-                          const SizedBox(width: 18),
                           IconButton(
                             icon: const Icon(Icons.settings),
                             onPressed: () {
